@@ -39,6 +39,6 @@ def res_printer(prop, value):
 if __name__ == '__main__':
     exit(
         generic_test.generic_test_main('rectangle_intersection.py',
-                                       'rectangle_intersection.tsv',
-                                       intersect_rectangle_wrapper,
-                                       res_printer=res_printer))
+                                        'rectangle_intersection.tsv',
+                                        intersect_rectangle_wrapper,
+                                        res_printer=res_printer))
