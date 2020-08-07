@@ -1,9 +1,25 @@
 from test_framework import generic_test
 
 
-def is_letter_constructible_from_magazine(letter_text: str,
-                                          magazine_text: str) -> bool:
-    # TODO - you fill in here.
+def is_letter_constructible_from_magazine(letter: str,
+                                          magazine: str) -> bool:
+    l_d = {}
+    m_d = {}
+    for l in letter:
+        if l not  in l_d:
+            l_d[l]=1
+        else:
+            l_d[l]+=1
+    for m in magazine:
+        if m not in m_d:
+            m_d[m]=1
+        else:
+            m_d[m]+=1
+    for k,v in l_d.items():
+        if k in m_d and v<=m_d[k]:
+            pass
+        else:
+            return False
     return True
 
 
