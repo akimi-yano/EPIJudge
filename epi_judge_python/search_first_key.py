@@ -4,16 +4,17 @@ from test_framework import generic_test
 
 
 def search_first_of_k(arr: List[int], key: int) -> int:
+    if len(arr) < 1:
+        return -1
+
     lo,hi = 0, len(arr)-1
-    while lo<=hi:
+    while lo<hi:
         mid = (lo+hi)//2
-        if arr[mid] == key and (mid==0 or arr[mid-1]!=key):
-            return mid
-        elif arr[mid] == key and (mid!=0 and arr[mid-1]==key):
-            hi  = mid-1
+        if arr[mid] >= key:
+            hi = mid
         else:
             lo = mid+1
-    return  -1
+    return -1 if arr[lo] != key else lo
 
 if __name__ == '__main__':
     exit(

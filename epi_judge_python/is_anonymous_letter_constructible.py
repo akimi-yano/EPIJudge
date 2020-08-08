@@ -39,8 +39,8 @@ import collections
 #     return not char_frequency_for_letter
 
 # Solution 3:
-def is_letter_constructible_from_magazine(letter_text,magazine_text):
-    return (not collections.Counter(letter_text)-collections.Counter(magazine_text))
+# def is_letter_constructible_from_magazine(letter_text,magazine_text):
+#     return (not collections.Counter(letter_text)-collections.Counter(magazine_text))
 
 
 
