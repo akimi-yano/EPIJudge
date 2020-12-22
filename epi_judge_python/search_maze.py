@@ -11,10 +11,24 @@ WHITE, BLACK = range(2)
 
 Coordinate = collections.namedtuple('Coordinate', ('x', 'y'))
 
-
+from collections import deque
 def search_maze(maze: List[List[int]], s: Coordinate,
                 e: Coordinate) -> List[Coordinate]:
-    # TODO - you fill in here.
+    s_x, s_y = s[0], s[1]
+    e_x, e_y = e[0], e[1]
+    queue = deque([[s_x, s_y, [(s_x, s_y)]]])
+    
+    while queue:    
+        x, y, path = queue.popleft()
+        if x == e_x and y == e_y:
+            return path
+        if maze[x][y] == 1:
+            continue
+        maze[x][y] = 1
+        
+        for new_x, new_y in ((x+1,y),(x-1,y),(x,y+1),(x,y-1)):
+            if 0 <= new_x <= len(maze)-1 and 0 <= new_y <= len(maze[0])-1 and maze[new_x][new_y] == 0:
+                queue.append([new_x, new_y, path + [Coordinate(x = new_x, y = new_y)]])
     return []
 
 
