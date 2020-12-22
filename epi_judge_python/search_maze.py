@@ -14,9 +14,9 @@ Coordinate = collections.namedtuple('Coordinate', ('x', 'y'))
 from collections import deque
 def search_maze(maze: List[List[int]], s: Coordinate,
                 e: Coordinate) -> List[Coordinate]:
-    s_x, s_y = s[0], s[1]
-    e_x, e_y = e[0], e[1]
-    queue = deque([[s_x, s_y, [(s_x, s_y)]]])
+    s_x, s_y = s.x, s.y
+    e_x, e_y = e.x, e.y
+    queue = deque([[s_x, s_y, [Coordinate(x=s_x, y=s_y)]]])
     
     while queue:    
         x, y, path = queue.popleft()
