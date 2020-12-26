@@ -8,9 +8,30 @@ from test_framework.test_utils import enable_executor_hook
 
 
 def has_cycle(head: ListNode) -> Optional[ListNode]:
-    # TODO - you fill in here.
-    return None
-
+    fast = slow = head
+    # important: start like this ! start from the same spot and move slow by 1 and fast by 2  
+    if fast is not None and fast.next is not None:
+        slow = slow.next
+        fast = fast.next.next
+    else:
+        return None
+    
+    while fast is not slow and fast is not None and fast.next is not None:
+        fast = fast.next.next
+        slow = slow.next
+    
+    if fast is not slow:
+        return None
+    else:
+        # the distance from the head to the beginning of cycle is equal to 
+        # the distance from where the slow and fast met and beginning of cycle 
+        # so we move the third and slow and where they meet is the start of the cycle 
+        third = head
+        while third is not slow:
+            third = third.next
+            slow = slow.next
+        return third
+    return head
 
 @enable_executor_hook
 def has_cycle_wrapper(executor, head, cycle_idx):
