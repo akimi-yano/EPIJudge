@@ -4,10 +4,40 @@ from bst_node import BstNode
 from test_framework import generic_test
 
 
-def find_first_greater_than_k(tree: BstNode, k: int) -> Optional[BstNode]:
-    # TODO - you fill in here.
-    return None
+# This solution works 
+# def find_first_greater_than_k(tree: BstNode, k: int) -> Optional[BstNode]:
+#     def helper(cur, target):
+#         nonlocal ans
 
+#         if not cur:
+#             return 
+#         helper(cur.left, target)
+#         if cur.data > target:
+#             ans = min(ans, cur, key=lambda node: node.data) if ans is not None else cur
+#             return
+#         helper(cur.right, target)
+
+#     ans = None
+#     helper(tree, k)
+#     return ans if ans else None
+
+def find_first_greater_than_k(tree: BstNode, k: int) -> Optional[BstNode]:
+    # definide this here before the helper definition
+    smallest_node = None
+    
+    def helper(cur):
+        nonlocal k, smallest_node
+        if not cur:
+            return 
+        if cur.data > k:
+            if (smallest_node is None) or (smallest_node and smallest_node.data > cur.data):
+                smallest_node = cur
+            helper(cur.left)
+        else:
+            helper(cur.right)
+    
+    helper(tree)
+    return smallest_node
 
 def find_first_greater_than_k_wrapper(tree, k):
     result = find_first_greater_than_k(tree, k)
