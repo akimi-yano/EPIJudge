@@ -2,7 +2,19 @@ from test_framework import generic_test
 
 
 def is_palindrome(s: str) -> bool:
-    # TODO - you fill in here.
+    valid = set("123456789abcdefghijklmnopqrstuvwxyz")
+    s = s.lower()
+    news = ""
+    for c in s:
+        if c in valid:
+            news += c
+    left = 0
+    right = len(news)-1
+    while left < right:
+        if news[left] != news[right]:
+            return False
+        left += 1
+        right -= 1    
     return True
 
 

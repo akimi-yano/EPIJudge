@@ -4,8 +4,15 @@ from test_framework import generic_test
 
 
 def plus_one(A: List[int]) -> List[int]:
-    # TODO - you fill in here.
-    return []
+    carry = 1 
+    for i in range(len(A)-1, -1, -1):
+        carry, val = divmod((A[i] + carry), 10)
+        A[i] =  val
+        
+    # add 1 at the end
+    if carry:
+        A = [carry] + A
+    return A
 
 
 if __name__ == '__main__':
