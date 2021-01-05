@@ -560,7 +560,7 @@ problem_mapping = {
                 "total": 103
             },
             "Python: reverse_words.py": {
-                "passed": 0,
+                "passed": 103,
                 "total": 103
             }
         },
@@ -740,7 +740,7 @@ problem_mapping = {
                 "total": 106
             },
             "Python: do_terminated_lists_overlap.py": {
-                "passed": 0,
+                "passed": 106,
                 "total": 106
             }
         },

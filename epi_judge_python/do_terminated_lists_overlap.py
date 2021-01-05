@@ -6,9 +6,34 @@ from test_framework.test_failure import TestFailure
 from test_framework.test_utils import enable_executor_hook
 
 
+# def overlapping_no_cycle_lists(l0: ListNode, l1: ListNode) -> ListNode:
+#     seen = set()
+#     cur1 = l0
+#     while cur1:
+#         seen.add(cur1.data)
+#         cur1 = cur1.next
+#     cur2 = l1
+#     while cur2:
+#         if cur2.data in seen:
+#             return cur2
+#         seen.add(cur2.data)
+#         cur2 = cur2.next
+#     return None
+
+
+# Time: O(M+N)
+# Space: O(1)
+'''
+it works because after iterating m+n(+k) nodes, they should meet
+'''
 def overlapping_no_cycle_lists(l0: ListNode, l1: ListNode) -> ListNode:
-    # TODO - you fill in here.
-    return ListNode()
+    cur1 = l0 
+    cur2 = l1
+    while True:
+        if cur1 == cur2:
+            return cur1
+        cur1 = cur1.next if cur1 else l1
+        cur2 = cur2.next if cur2 else l0
 
 
 @enable_executor_hook
