@@ -1,24 +1,55 @@
 from test_framework import generic_test
 from test_framework.test_failure import TestFailure
 
+# n/s     
+# [1, 2, 3]
+
+# dequeue()
+#  n     s
+# [None, 2, 3]
+
+# enqueue(4)
+#    n/s
+# [4, 2, 3]
+
+# enqueue(5)
+#
+# [None, None, None, None, None, None]
+#  s        n
+# [2, 3, 4, None, None, None]
+#  s           n
+# [2, 3, 4, 5, None, None]
 
 class Queue:
     def __init__(self, capacity: int) -> None:
-        # TODO - you fill in here.
-        return
+        self.storage = [None] * max(capacity, 1)
+        self.count = 0
+        self.start = 0
+        self.next = 0
 
     def enqueue(self, x: int) -> None:
-        # TODO - you fill in here.
-        return
+        if self.count >= len(self.storage):
+            self.resize()
+        self.storage[self.next] = x
+        self.next = (self.next + 1) % len(self.storage)
+        self.count += 1
 
     def dequeue(self) -> int:
-        # TODO - you fill in here.
-        return 0
+        val = self.storage[self.start]
+        self.storage[self.start] = None
+        self.start = (self.start + 1) % len(self.storage)
+        self.count -= 1
+        return val
 
     def size(self) -> int:
-        # TODO - you fill in here.
-        return 0
-
+        return self.count
+    
+    def resize(self):
+        new_storage = [None] * len(self.storage) * 2
+        for i in range(self.count):
+            new_storage[i] = self.storage[(self.start+i) % len(self.storage)]
+        self.storage = new_storage
+        self.start, self.next = 0, self.count
 
 def queue_tester(ops):
     q = Queue(1)
