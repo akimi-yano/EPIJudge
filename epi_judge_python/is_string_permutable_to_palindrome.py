@@ -1,8 +1,14 @@
 from test_framework import generic_test
 
-
+from collections import Counter
 def can_form_palindrome(s: str) -> bool:
-    # TODO - you fill in here.
+    counts = Counter(s)
+    odd = 0
+    for v in counts.values():
+        if v % 2 != 0:
+            odd += 1
+            if odd > 1:
+                return False
     return True
 
 
