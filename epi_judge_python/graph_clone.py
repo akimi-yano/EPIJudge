@@ -16,6 +16,7 @@ def clone_graph(graph: GraphVertex) -> GraphVertex:
         if cur in memo:
             return memo[cur]
         new_node = GraphVertex(cur.label)
+        # use memo instead of seen set to return the new node if the same old node is accessed (before adding edges)
         memo[cur] = new_node
         for nextnode in cur.edges:
             new_node.edges.append(helper(nextnode))
