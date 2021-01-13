@@ -2016,7 +2016,7 @@ problem_mapping = {
                 "total": 8
             },
             "Python: permutations.py": {
-                "passed": 0,
+                "passed": 8,
                 "total": 8
             }
         },
@@ -2184,7 +2184,7 @@ problem_mapping = {
                 "total": 1775
             },
             "Python: number_of_traversals_matrix.py": {
-                "passed": 0,
+                "passed": 1775,
                 "total": 1775
             }
         },
