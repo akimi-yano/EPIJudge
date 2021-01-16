@@ -4,6 +4,7 @@ from test_framework import generic_test
 
 
 
+# This solution works - optimization
 # Given n, return all primes up to and including n.
 def generate_primes(n: int) -> List[int]:
     prime_table = [1 for _ in range(n+1)]
@@ -15,12 +16,36 @@ def generate_primes(n: int) -> List[int]:
     for i in range(2, n+1):
         if prime_table[i]:
             prime_answer.append(i)
-            j = i + i
+            # start from i^2 because:
+            # j+j=2*j, and we already marked multiples of 2 as not prime
+            # j+j+j=3*j, and we already marked multiples of 3 as not prime
+            # ...
+            # j+j+j+..+j= j * j, we have not yet marked multiples of j as not prime
+            j = i * i
             while j < (n+1):
                 if prime_table[j]:
                     prime_table[j] = 0
                 j += i
     return prime_answer
+
+# This solution works
+# Given n, return all primes up to and including n.
+# def generate_primes(n: int) -> List[int]:
+#     prime_table = [1 for _ in range(n+1)]
+#     if n == 0 or n == 1:
+#         return []
+#     prime_table[0] = 0
+#     prime_table[1] = 0
+#     prime_answer = []
+#     for i in range(2, n+1):
+#         if prime_table[i]:
+#             prime_answer.append(i)
+#             j = i + i
+#             while j < (n+1):
+#                 if prime_table[j]:
+#                     prime_table[j] = 0
+#                 j += i
+#     return prime_answer
 
 # This approach works, but I am expected to do better than this
 # Given n, return all primes up to and including n.
