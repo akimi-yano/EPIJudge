@@ -1,16 +1,20 @@
 from test_framework import generic_test
 from test_framework.test_failure import TestFailure
 
-
+# stack[0,1,3]
 class Queue:
+    def __init__(self):
+        self.add_stack = []
+        self.remove_stack = []
+        
     def enqueue(self, x: int) -> None:
-        # TODO - you fill in here.
-        return
-
+        self.add_stack.append(x)
+    
     def dequeue(self) -> int:
-        # TODO - you fill in here.
-        return 0
-
+        if not self.remove_stack:
+            while self.add_stack:
+                self.remove_stack.append(self.add_stack.pop())
+        return self.remove_stack.pop()
 
 def queue_tester(ops):
     try:
