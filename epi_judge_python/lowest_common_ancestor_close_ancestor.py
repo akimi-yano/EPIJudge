@@ -8,12 +8,38 @@ from test_framework.test_failure import TestFailure
 from test_framework.test_utils import enable_executor_hook
 
 
+# This solution works!:
 def lca(node0: BinaryTreeNode,
         node1: BinaryTreeNode) -> Optional[BinaryTreeNode]:
-    # TODO - you fill in here.
-    return None
+    cur1, cur2 = node0, node1
+    if cur1 is cur2:
+        return cur1
+    seen = set([])
+    while cur1.parent and cur2.parent:
+        if cur1 in seen:
+            return cur1
+        seen.add(cur1)
+        cur1 = cur1.parent
+        
+        if cur2 in seen:
+            return cur2
+        seen.add(cur2)
+        cur2 = cur2.parent
+    
+    while cur1.parent:
+        if cur1 in seen:
+            return cur1
+        seen.add(cur1)
+        cur1 = cur1.parent
 
-
+    while cur2.parent:
+        if cur2 in seen:
+            return cur2
+        seen.add(cur2)
+        cur2 = cur2.parent
+    
+    return cur1
+        
 @enable_executor_hook
 def lca_wrapper(executor, tree, node0, node1):
     result = executor.run(
