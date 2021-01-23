@@ -8,11 +8,30 @@ from test_framework.test_utils import enable_executor_hook
 
 Subarray = collections.namedtuple('Subarray', ('start', 'end'))
 
-
-def find_smallest_subarray_covering_set(paragraph: List[str],
-                                        keywords: Set[str]) -> Subarray:
-    # TODO - you fill in here.
-    return Subarray(0, 0)
+# this solution works !
+def find_smallest_subarray_covering_set(paragraph: List[str], keywords: Set[str]) -> Subarray:
+    # [strawberry, apple, pine, pen]  apple, pen
+    # memo = {} <- counter
+    # s                         e 
+    
+    memo = {}
+    start = 0
+    s_ans,  e_ans = 0, len(paragraph) - 1
+    for end in range(len(paragraph)):
+        if paragraph[end] in keywords:
+            if paragraph[end] not in memo:
+                memo[paragraph[end]] = 1
+            else:
+                memo[paragraph[end]] += 1
+            while len(memo) == len(keywords):
+                if e_ans-s_ans > end-start:
+                    s_ans, e_ans = start, end
+                if paragraph[start] in memo:
+                    memo[paragraph[start]] -= 1
+                    if memo[paragraph[start]] < 1:
+                        del memo[paragraph[start]]
+                start += 1
+    return Subarray(s_ans, e_ans)
 
 
 @enable_executor_hook
