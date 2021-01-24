@@ -8,10 +8,11 @@ from test_framework.binary_tree_utils import (binary_tree_height,
 from test_framework.test_failure import TestFailure
 from test_framework.test_utils import enable_executor_hook
 
+# This solution works ! - dont forget to do end + start // 2 (addition not subtraction)
+# print to debug 
 
 def build_min_height_bst_from_sorted_array(A: List[int]) -> Optional[BstNode]:
     def helper(start, end):
-        # print(start, end)
         if end - start < 0:
             return None
         mid_idx = (end+start)//2
