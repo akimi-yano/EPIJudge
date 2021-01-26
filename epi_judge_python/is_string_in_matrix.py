@@ -9,11 +9,9 @@ def is_pattern_contained_in_grid(grid: List[List[int]], pattern: List[int]) -> b
     def helper(row, col, i):
         if i > len(pattern)-1:
             return True
-        if not (0 <= row <= ROW-1) or not (0 <= col <= COL-1):
+        if not (0 <= row <= ROW-1) or not (0 <= col <= COL-1) or grid[row][col] != pattern[i]:
             return False
-        if grid[row][col] == pattern[i]:
-            return helper(row+1, col, i+1) | helper(row-1, col, i+1) | helper(row, col+1, i+1) | helper(row, col-1, i+1)
-        return False
+        return helper(row+1, col, i+1) | helper(row-1, col, i+1) | helper(row, col+1, i+1) | helper(row, col-1, i+1)
     
     if not pattern or not grid:
         return False
@@ -21,9 +19,8 @@ def is_pattern_contained_in_grid(grid: List[List[int]], pattern: List[int]) -> b
     COL = len(grid[0])
     for row in range(ROW):
         for col in range(COL):
-            if grid[row][col] == pattern[0]:
-                if helper(row, col, 0):
-                    return True
+            if helper(row, col, 0):
+                return True
     return False
     
 
