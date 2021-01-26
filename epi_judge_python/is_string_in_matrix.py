@@ -2,8 +2,10 @@ from typing import List
 
 from test_framework import generic_test
 
-
+from functools import lru_cache
 def is_pattern_contained_in_grid(grid: List[List[int]], pattern: List[int]) -> bool:
+    
+    @lru_cache(None)
     def helper(row, col, i):
         if i > len(pattern)-1:
             return True
