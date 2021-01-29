@@ -7,10 +7,17 @@ from test_framework.random_sequence_checker import (
     compute_combination_idx, run_func_with_retries)
 from test_framework.test_utils import enable_executor_hook
 
-
+import random
 def random_subset(n: int, k: int) -> List[int]:
-    # TODO - you fill in here.
-    return []
+    choices = [i for i in range(n)]
+    ans = []
+    N = len(choices)
+    for _ in range(k):
+        idx = random.randint(0, N-1)
+        ans.append(choices[idx])
+        choices[idx], choices[N-1] = choices[N-1], choices[idx]
+        N -= 1
+    return ans
 
 
 @enable_executor_hook
