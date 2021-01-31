@@ -11,10 +11,29 @@ class BinaryTreeNode:
         self.right = None
         self.next = None  # Populates this field.
 
-
+# This solution works
 def construct_right_sibling(tree: BinaryTreeNode) -> None:
-    # TODO - you fill in here.
-    return
+    '''
+          O
+      O   -   O
+    O - O - O - O
+    '''
+    prev_cur = tree
+    cur = dummy_node = BinaryTreeNode()
+    while prev_cur is not None:
+        while prev_cur is not None:
+            if prev_cur.left is not None:
+                cur.next  = prev_cur.left
+                cur = cur.next
+            if prev_cur.right is not None:
+                cur.next = prev_cur.right
+                cur = cur.next
+            prev_cur = prev_cur.next
+        prev_cur = dummy_node.next
+        dummy_node.next = None
+        cur = dummy_node
+            
+    
 
 
 def traverse_next(node):
