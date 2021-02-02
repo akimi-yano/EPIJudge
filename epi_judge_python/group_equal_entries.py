@@ -8,10 +8,23 @@ from test_framework.test_utils import enable_executor_hook
 
 Person = collections.namedtuple('Person', ('age', 'name'))
 
-
 def group_by_age(people: List[Person]) -> None:
-    # TODO - you fill in here.
-    return
+    ages = {}
+    for person in people:
+        if person.age not in ages:
+            ages[person.age] = []
+        ages[person.age].append(person)
+        
+    i = 0
+    for arr in ages.values():
+        for ppl in arr:
+            people[i] = ppl
+            i += 1
+    
+
+# This solution works
+# def group_by_age(people: List[Person]) -> None:
+#     people.sort()
 
 
 @enable_executor_hook
